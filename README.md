@@ -1,3 +1,10 @@
 ## Flag Master's
 
+- Light Mode
+  
+![image](https://github.com/BroLetsCodeIt/Flag-Master/assets/113767803/0e24ff25-352b-447f-b16f-8d904ccd3307)
+
+- Dark Mode
+  
+![image](https://github.com/BroLetsCodeIt/Flag-Master/assets/113767803/8c45a595-eff6-4a7d-8af2-b0ce02186d20)
 
