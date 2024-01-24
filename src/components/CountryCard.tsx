@@ -88,6 +88,10 @@ function CountryCard(props: CountryProp) {
             }
             
           </div>
+          <div className="mb-3">
+            <span className="font-semibold">Region : </span>
+            <span>{props.region}</span>
+          </div>
           <div className="flex items-center justify-between w-full">
             <Link
               href={`/${props.name.common}`}

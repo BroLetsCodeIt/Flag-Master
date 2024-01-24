@@ -10,14 +10,14 @@ export default function Home() {
 
   const [searchTerm , setSearchTerm] = useState("");
   const [filterData , setFilterData ] = useState<CountryProp[] | undefined>([]);
+  const [regionData , setRegionData] = useState<string>("");
+
   const { isLoading, isError, data:CountryData } = useQuery<CountryProp[]>({
     queryKey: ["countries"],
     queryFn: () => {
       return fetchCountries();
     },
   });
-
- 
 
    useEffect(()=>{
     let data = CountryData ; 
@@ -26,7 +26,19 @@ export default function Home() {
     }
  
     setFilterData(data);
-   },[searchTerm , CountryData])
+    
+    if(regionData){
+      if(regionData == "all"){
+        setFilterData(data);
+      }else{
+
+        data = data?.filter((item)=>item.region == regionData);
+      }
+    }
+
+    setFilterData(data);
+   
+   },[searchTerm , CountryData,regionData])
 
   if (isLoading) {
     return (
@@ -40,15 +52,19 @@ export default function Home() {
     return <div>{isError}</div>;
   }
 
- 
+  const regions = [...new Set(CountryData?.map((d)=>d.region))];
+  
+  // console.log(regions);
 
   function handleOnChangeSearch(e:React.ChangeEvent<HTMLInputElement>) {
     setSearchTerm(e.target.value);
   } 
 
-
- 
-  console.log(filterData);
+  function handleonchangefilter(e:React.ChangeEvent<HTMLSelectElement>){
+       setRegionData(e.target.value);
+       console.log(regionData);
+  }
+  // console.log(filterData);
   // console.log(data);
   return (
     <>
@@ -61,14 +77,24 @@ export default function Home() {
        <div className="flex w-[30%] items-center gap-2 justify-center">
        <label htmlFor="countries" className="block mb-2  font-medium text-gray-900 dark:text-white "><FaFilter  size={30}/></label>
         <select
+          onChange={handleonchangefilter}
+          value={regionData}
           id="countries"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         >
-          <option selected>Select</option>
+          {/* <option selected>Select</option>
           <option value="US">Region</option>
           <option value="CA">Country</option>
           <option value="FR">Captial</option>
-          <option value="DE">Germany</option>
+          <option value="DE">Germany</option> */}
+          <option value={"all"}>Select All</option>
+          {
+            regions.map((r,i)=>{
+              return (
+                <option key={i} value={r}>{r}</option>
+              )
+            })
+          }
         </select>
         </div>
       </section>
