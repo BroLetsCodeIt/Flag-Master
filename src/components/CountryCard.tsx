@@ -65,7 +65,7 @@ function CountryCard(props: CountryProp) {
   return (
     <>
       <div className=" bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 max-w-sm overflow-hidden min-h-[22rem] w-[30rem]">
-        <Link href={`/${props?.name?.common}`}>
+        <Link href={`/${props.name.common}`}>
           <CountryImage src={props.flags.svg} />
         </Link>
         <div className="p-5 flex flex-col items-start justify-between">

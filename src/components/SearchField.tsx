@@ -44,7 +44,7 @@ const SearchField = (props: Props) => {
               required
               value={props.value}
               onChange={props.onChange}
-              x-webkit-speech
+             
             />
             <button
               type="button"

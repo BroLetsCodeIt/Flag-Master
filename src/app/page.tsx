@@ -1,6 +1,6 @@
 "use client";
 import CountryCard, { CountryProp } from "@/components/CountryCard";
-import fetchCountries from "./action";
+import {fetchCountries} from "./action";
 import { UseQueryResult, useQuery } from "react-query";
 import { FaFilter } from "react-icons/fa";
 import SkeletonPage from "@/components/ui/Skeleton";
@@ -65,7 +65,7 @@ export default function Home() {
        console.log(regionData);
   }
   // console.log(filterData);
-  // console.log(data);
+  // console.log(CountryData);
   return (
     <>
       <section className="pt-[10rem] container mx-auto flex items-center justify-between px-[4.7rem]  gap-3 w-full">
@@ -98,7 +98,7 @@ export default function Home() {
         </select>
         </div>
       </section>
-
+    
       <div className="container mx-auto w-full  flex pt-[5rem] h-screen flex-wrap gap-10 items-center justify-evenly">
         {filterData?.map((dt, i) => {
           return (
@@ -121,6 +121,10 @@ export default function Home() {
             </>
           );
         })}
+
+        {
+          Array.isArray(filterData) && filterData.length <= 0 && <h1 className="font-bold">No Data Available</h1>
+        }
       </div>
     </>
   );
